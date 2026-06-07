@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Aayush Chandak - Frontend Web Developer portfolio for responsive websites, landing pages, Figma to code, React, Next.js, and WordPress customization." />
+  <title>Aayush Chandak | Frontend Web Developer</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div class="cursor-glow" aria-hidden="true"></div>
+  <div class="page-loader" aria-hidden="true">
+    <div class="loader-card">
+      <span class="loader-code">&lt;/&gt;</span>
+      <p>Loading portfolio</p>
+    </div>
+  </div>
+
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <header class="site-header" id="top">
+    <nav class="nav container" aria-label="Main navigation">
+      <a class="brand" href="#top" aria-label="Aayush Chandak home">
+        <span class="brand-mark">AC</span>
+        <span class="brand-text">Aayush</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <div class="nav-menu">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <a class="nav-cta" href="./resume/Aayush_Chandak_Resume.pdf" download>Download Resume</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero section-pad">
+      <div class="hero-bg" aria-hidden="true">
+        <span class="orb orb-one"></span>
+        <span class="orb orb-two"></span>
+        <span class="grid-mask"></span>
+      </div>
+
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <p class="eyebrow reveal-up">Open to Full-time Roles + Freelance Projects</p>
+          <h1 class="hero-title reveal-up">
+            Frontend Developer building polished web experiences for brands.
+          </h1>
+          <p class="hero-subtitle reveal-up">
+            I create responsive websites, landing pages, WordPress customizations, and Figma-to-code interfaces using HTML, CSS, JavaScript, React.js, Next.js, Tailwind CSS, and Bootstrap.
+          </p>
+
+          <div class="hero-actions reveal-up">
+            <a class="btn btn-primary" href="#projects">View Projects</a>
+            <a class="btn btn-secondary" href="#contact">Hire Me</a>
+          </div>
+
+          <div class="quick-stats reveal-up" aria-label="Portfolio highlights">
+            <div>
+              <strong>5+</strong>
+              <span>Recent Projects</span>
+            </div>
+            <div>
+              <strong>100%</strong>
+              <span>Responsive Focus</span>
+            </div>
+            <div>
+              <strong>Job +</strong>
+              <span>Freelance Ready</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal-scale" aria-label="Developer dashboard visual">
+          <div class="visual-shell">
+            <div class="visual-topbar">
+              <span></span><span></span><span></span>
+              <p>portfolio.jsx</p>
+            </div>
+            <div class="code-window">
+              <pre><code><span class="muted">const</span> developer = {
+  name: <span class="string">"Aayush Chandak"</span>,
+  role: <span class="string">"Frontend Web Developer"</span>,
+  focus: [<span class="string">"Responsive UI"</span>, <span class="string">"Figma to Code"</span>],
+  availableFor: [<span class="string">"Full-time"</span>, <span class="string">"Freelance"</span>]
+};</code></pre>
+            </div>
+            <div class="visual-footer">
+              <span>React.js</span>
+              <span>Next.js</span>
+              <span>WordPress</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="logo-strip" aria-label="Core skills marquee">
+      <div class="strip-track">
+        <span>HTML</span><span>CSS</span><span>JavaScript</span><span>React.js</span><span>Next.js</span><span>Tailwind CSS</span><span>Bootstrap</span><span>WordPress</span><span>GSAP</span>
+        <span>HTML</span><span>CSS</span><span>JavaScript</span><span>React.js</span><span>Next.js</span><span>Tailwind CSS</span><span>Bootstrap</span><span>WordPress</span><span>GSAP</span>
+      </div>
+    </section>
+
+    <section class="about section-pad" id="about">
+      <div class="container about-grid">
+        <div class="portrait-card reveal-left">
+          <img src="./assets/profile.png" alt="Aayush Chandak profile photo" />
+          <div class="availability-pill"><span></span> Available for work</div>
+        </div>
+
+        <div class="about-content reveal-right">
+          <p class="section-kicker">About me</p>
+          <h2>Developer profile made for recruiters and clients.</h2>
+          <p>
+            Hi, I’m Aayush Chandak, a Frontend Web Developer focused on building modern, responsive, and user-friendly websites. I’m open to frontend developer roles and freelance website projects.
+          </p>
+          <p>
+            My work includes landing pages, business websites, Figma to HTML/CSS conversion, React/Next.js UI development, WordPress customization, and responsive website fixes.
+          </p>
+
+          <div class="about-points">
+            <span>Responsive-first layouts</span>
+            <span>Clean frontend structure</span>
+            <span>Modern UI animations</span>
+            <span>Client-ready website delivery</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="services section-pad" id="services">
+      <div class="container">
+        <div class="section-heading reveal-up">
+          <p class="section-kicker">Services</p>
+          <h2>What I can build for you</h2>
+          <p>Professional frontend services for businesses, founders, agencies, and recruiters looking for clean web execution.</p>
+        </div>
+
+        <div class="service-grid">
+          <article class="service-card reveal-up">
+            <span class="service-icon">01</span>
+            <h3>Figma to Code</h3>
+            <p>Convert Figma designs into responsive HTML, CSS, JavaScript, React, or Next.js interfaces.</p>
+          </article>
+          <article class="service-card reveal-up">
+            <span class="service-icon">02</span>
+            <h3>Landing Pages</h3>
+            <p>Premium landing pages with clear sections, strong visuals, CTA buttons, and smooth animations.</p>
+          </article>
+          <article class="service-card reveal-up">
+            <span class="service-icon">03</span>
+            <h3>Business Websites</h3>
+            <p>Modern websites for businesses with professional structure, responsive layouts, and clean UX.</p>
+          </article>
+          <article class="service-card reveal-up">
+            <span class="service-icon">04</span>
+            <h3>WordPress Customization</h3>
+            <p>Customize WordPress pages, layouts, sections, and responsive issues with clean CSS/JS fixes.</p>
+          </article>
+          <article class="service-card reveal-up">
+            <span class="service-icon">05</span>
+            <h3>Responsive Fixes</h3>
+            <p>Fix mobile, tablet, and desktop layout problems from 320px to large screens.</p>
+          </article>
+          <article class="service-card reveal-up">
+            <span class="service-icon">06</span>
+            <h3>React/Next.js UI</h3>
+            <p>Reusable components, clean page sections, UI states, and frontend integration-ready layouts.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="projects section-pad" id="projects">
+      <div class="container">
+        <div class="section-heading reveal-up">
+          <p class="section-kicker">Featured projects</p>
+          <h2>Recent work</h2>
+          <p>Live links can be added for public projects. Private/client projects can stay as short case studies.</p>
+        </div>
+
+        <div class="project-grid">
+          <article class="project-card reveal-up" data-project="Creative Commute">
+            <div class="project-thumb thumb-creative">
+              <span>Creative Commute</span>
+            </div>
+            <div class="project-body">
+              <div class="project-meta"><span>Figma to Code</span><span>Responsive</span></div>
+              <h3>Creative Commute</h3>
+              <p>Responsive frontend and WordPress-style website sections with polished UI, spacing, and mobile-first refinements.</p>
+              <a href="#contact" class="project-link">Request case study →</a>
+            </div>
+          </article>
+
+          <article class="project-card reveal-up" data-project="Magic Task">
+            <div class="project-thumb thumb-magic">
+              <span>Magic Task</span>
+            </div>
+            <div class="project-body">
+              <div class="project-meta"><span>UI Design</span><span>Frontend</span></div>
+              <h3>Magic Task</h3>
+              <p>Clean interface-focused project with modern sections, responsive layouts, and frontend interaction polish.</p>
+              <a href="#contact" class="project-link">Request case study →</a>
+            </div>
+          </article>
+
+          <article class="project-card reveal-up" data-project="Bathroom Brothers">
+            <div class="project-thumb thumb-bathroom">
+              <span>Bathroom Brothers</span>
+            </div>
+            <div class="project-body">
+              <div class="project-meta"><span>Business Website</span><span>UI</span></div>
+              <h3>Bathroom Brothers</h3>
+              <p>Business website UI with service-focused content blocks, clean sections, and conversion-friendly layout.</p>
+              <a href="#contact" class="project-link">Request case study →</a>
+            </div>
+          </article>
+
+          <article class="project-card reveal-up" data-project="SpaceGlam">
+            <div class="project-thumb thumb-spaceglam">
+              <span>SpaceGlam</span>
+            </div>
+            <div class="project-body">
+              <div class="project-meta"><span>Multi-page</span><span>GSAP</span></div>
+              <h3>SpaceGlam</h3>
+              <p>Premium multi-page interior design website concept with animated hero, projects, services, and contact pages.</p>
+              <a href="#contact" class="project-link">Request case study →</a>
+            </div>
+          </article>
+
+          <article class="project-card reveal-up" data-project="LetsDevelopIt">
+            <div class="project-thumb thumb-lets">
+              <span>LetsDevelopIt</span>
+            </div>
+            <div class="project-body">
+              <div class="project-meta"><span>Frontend</span><span>Web UI</span></div>
+              <h3>LetsDevelopIt</h3>
+              <p>Frontend website project focused on clean layout, professional presentation, and responsive user experience.</p>
+              <a href="#contact" class="project-link">Request case study →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="skills section-pad" id="skills">
+      <div class="container skills-grid">
+        <div class="skills-copy reveal-left">
+          <p class="section-kicker">Skills</p>
+          <h2>Frontend stack I use</h2>
+          <p>Tools and technologies I use for building responsive websites, UI components, landing pages, and client-focused frontend projects.</p>
+        </div>
+
+        <div class="skill-cloud reveal-right" aria-label="Skill list">
+          <span>HTML5</span>
+          <span>CSS3</span>
+          <span>JavaScript</span>
+          <span>React.js</span>
+          <span>Next.js</span>
+          <span>Tailwind CSS</span>
+          <span>Bootstrap</span>
+          <span>WordPress</span>
+          <span>Git</span>
+          <span>GitHub</span>
+          <span>GSAP</span>
+          <span>Responsive Design</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="process section-pad">
+      <div class="container">
+        <div class="section-heading reveal-up">
+          <p class="section-kicker">Process</p>
+          <h2>How I work on projects</h2>
+        </div>
+
+        <div class="process-timeline">
+          <div class="process-step reveal-up">
+            <span>01</span>
+            <h3>Understand</h3>
+            <p>Project goals, design style, sections, references, and target users.</p>
+          </div>
+          <div class="process-step reveal-up">
+            <span>02</span>
+            <h3>Build</h3>
+            <p>Clean frontend layout with responsive structure and reusable sections.</p>
+          </div>
+          <div class="process-step reveal-up">
+            <span>03</span>
+            <h3>Animate</h3>
+            <p>Professional GSAP interactions without making the site heavy or confusing.</p>
+          </div>
+          <div class="process-step reveal-up">
+            <span>04</span>
+            <h3>Polish</h3>
+            <p>Final responsive fixes, browser checks, spacing, and delivery-ready files.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="resume-cta section-pad" id="resume">
+      <div class="container cta-card reveal-scale">
+        <p class="section-kicker">Resume</p>
+        <h2>Want to review my work and skills?</h2>
+        <p>Download my resume or contact me directly for frontend developer roles and freelance website projects.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="./resume/Aayush_Chandak_Resume.pdf" download>Download Resume</a>
+          <a class="btn btn-secondary" href="mailto:aayushchandak1011@gmail.com">Email Me</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact section-pad" id="contact">
+      <div class="container contact-grid">
+        <div class="contact-copy reveal-left">
+          <p class="section-kicker">Contact</p>
+          <h2>Let’s build a clean website together.</h2>
+          <p>Available for frontend developer roles, React/Next.js UI work, WordPress customization, responsive fixes, and freelance website projects.</p>
+        </div>
+
+        <div class="contact-card reveal-right">
+          <a href="mailto:aayushchandak1011@gmail.com">
+            <span>Email</span>
+            <strong>aayushchandak1011@gmail.com</strong>
+          </a>
+          <a href="https://www.linkedin.com/in/aayush-chandak-frontend/" target="_blank" rel="noopener">
+            <span>LinkedIn</span>
+            <strong>linkedin.com/in/aayush-chandak-frontend</strong>
+          </a>
+          <a href="./resume/Aayush_Chandak_Resume.pdf" download>
+            <span>Resume</span>
+            <strong>Download updated CV</strong>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand-block">
+        <a class="footer-brand" href="#top" aria-label="Back to home">
+          <span class="brand-mark">AC</span>
+          <span>Aayush Chandak</span>
+        </a>
+        <p>© <span id="year"></span> Aayush Chandak. All rights reserved.</p>
+      </div>
+
+      <div class="footer-links" aria-label="Footer links">
+        <a href="mailto:aayushchandak1011@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/aayush-chandak-frontend/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="./resume/Aayush_Chandak_Resume.pdf" download>Resume</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="./script.js"></script>
+</body>
+</html>
