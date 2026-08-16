@@ -3,6 +3,10 @@
 
   const heroTypographyStyle = document.createElement("style");
   heroTypographyStyle.textContent = `
+    .hero-visual {
+      display: none !important;
+    }
+
     .hero-title {
       font-size: clamp(2.55rem, 4.4vw, 4rem) !important;
       font-weight: 600 !important;
