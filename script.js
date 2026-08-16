@@ -1,6 +1,62 @@
 (function () {
   "use strict";
 
+  const heroTypographyStyle = document.createElement("style");
+  heroTypographyStyle.textContent = `
+    .hero-title {
+      font-size: clamp(2.55rem, 4.4vw, 4rem) !important;
+      font-weight: 600 !important;
+      line-height: 1.08 !important;
+      letter-spacing: -0.045em !important;
+    }
+
+    @media (max-width: 1280px) {
+      .hero-title {
+        font-size: clamp(2.5rem, 4.35vw, 3.75rem) !important;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .hero-title {
+        max-width: 720px !important;
+        font-size: clamp(2.45rem, 5.2vw, 3.35rem) !important;
+      }
+    }
+
+    @media (max-width: 820px) {
+      .hero-title {
+        font-size: clamp(2.3rem, 6vw, 3rem) !important;
+        line-height: 1.1 !important;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .hero-title {
+        font-size: clamp(2rem, 8.5vw, 2.5rem) !important;
+        letter-spacing: -0.04em !important;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .hero-title {
+        font-size: clamp(1.95rem, 8.7vw, 2.3rem) !important;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .hero-title {
+        font-size: clamp(1.85rem, 8.8vw, 2rem) !important;
+      }
+    }
+
+    @media (max-width: 320px) {
+      .hero-title {
+        font-size: 1.82rem !important;
+      }
+    }
+  `;
+  document.head.appendChild(heroTypographyStyle);
+
   const body = document.body;
   const loader = document.querySelector(".page-loader");
   const navToggle = document.querySelector(".nav-toggle");
