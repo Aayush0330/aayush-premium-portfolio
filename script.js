@@ -1,124 +1,34 @@
 (function () {
   "use strict";
 
-  const heroTypographyStyle = document.createElement("style");
-  heroTypographyStyle.textContent = `
-    .hero-visual {
-      display: none !important;
-    }
-
-    .hero-grid {
-      grid-template-columns: minmax(0, 1fr) !important;
-      gap: 0 !important;
-    }
-
-    .hero-content {
-      width: min(100%, 980px) !important;
-      max-width: 980px !important;
-      margin-inline: auto !important;
-    }
-
-    .hero-title {
-      max-width: 900px !important;
-      font-size: clamp(2.55rem, 4.4vw, 4rem) !important;
-      font-weight: 600 !important;
-      line-height: 1.08 !important;
-      letter-spacing: -0.045em !important;
-    }
-
-    .hero-subtitle {
-      max-width: 820px !important;
-    }
-
-    .quick-stats {
-      max-width: 760px !important;
-    }
-
-    @media (max-width: 1280px) {
-      .hero-content {
-        width: min(100%, 900px) !important;
-      }
-
-      .hero-title {
-        max-width: 840px !important;
-        font-size: clamp(2.5rem, 4.35vw, 3.75rem) !important;
-      }
-    }
-
-    @media (max-width: 1024px) {
-      .hero-content {
-        width: 100% !important;
-        max-width: 820px !important;
-      }
-
-      .hero-title {
-        max-width: 760px !important;
-        font-size: clamp(2.45rem, 5.2vw, 3.35rem) !important;
-      }
-
-      .hero-subtitle {
-        max-width: 760px !important;
-      }
-    }
-
-    @media (max-width: 820px) {
-      .hero-title {
-        max-width: 700px !important;
-        font-size: clamp(2.3rem, 6vw, 3rem) !important;
-        line-height: 1.1 !important;
-      }
-    }
-
-    @media (max-width: 540px) {
-      .hero-content {
-        max-width: 100% !important;
-      }
-
-      .hero-title {
-        font-size: clamp(2rem, 8.5vw, 2.5rem) !important;
-        letter-spacing: -0.04em !important;
-      }
-
-      .quick-stats {
-        max-width: 100% !important;
-      }
-    }
-
-    @media (max-width: 420px) {
-      .hero-title {
-        font-size: clamp(1.95rem, 8.7vw, 2.3rem) !important;
-      }
-    }
-
-    @media (max-width: 360px) {
-      .hero-title {
-        font-size: clamp(1.85rem, 8.8vw, 2rem) !important;
-      }
-    }
-
-    @media (max-width: 320px) {
-      .hero-title {
-        font-size: 1.82rem !important;
-      }
-    }
-  `;
-  document.head.appendChild(heroTypographyStyle);
-
   const body = document.body;
   const loader = document.querySelector(".page-loader");
   const navToggle = document.querySelector(".nav-toggle");
   const navMenu = document.querySelector(".nav-menu");
+  const header = document.querySelector(".site-header");
   const progress = document.querySelector(".scroll-progress");
   const cursorGlow = document.querySelector(".cursor-glow");
   const year = document.querySelector("#year");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  if (year) year.textContent = new Date().getFullYear();
+  if (year) {
+    year.textContent = new Date().getFullYear();
+  }
 
   window.addEventListener("load", () => {
-    if (window.gsap && loader) {
+    if (window.gsap && loader && !reduceMotion) {
       gsap.timeline()
-        .to(".loader-card", { scale: 0.92, opacity: 0, duration: 0.45, ease: "power2.inOut" })
-        .to(loader, { yPercent: -100, duration: 0.85, ease: "expo.inOut" }, "-=0.18")
+        .to(".loader-card", {
+          scale: 0.96,
+          opacity: 0,
+          duration: 0.32,
+          ease: "power2.inOut"
+        })
+        .to(loader, {
+          yPercent: -100,
+          duration: 0.68,
+          ease: "expo.inOut"
+        }, "-=0.12")
         .set(loader, { display: "none" });
     } else if (loader) {
       loader.style.display = "none";
@@ -141,17 +51,55 @@
     });
   }
 
-  window.addEventListener("scroll", () => {
+  function updateScrollUI() {
     const max = document.documentElement.scrollHeight - window.innerHeight;
     const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
-    if (progress) progress.style.width = pct + "%";
-  }, { passive: true });
 
-  if (cursorGlow && window.matchMedia("(pointer: fine)").matches) {
+    if (progress) {
+      progress.style.width = pct + "%";
+    }
+
+    if (header) {
+      header.classList.toggle("is-scrolled", window.scrollY > 20);
+    }
+  }
+
+  updateScrollUI();
+  window.addEventListener("scroll", updateScrollUI, { passive: true });
+
+  if (cursorGlow && window.matchMedia("(pointer: fine)").matches && !reduceMotion) {
     window.addEventListener("pointermove", (event) => {
       cursorGlow.style.left = event.clientX + "px";
       cursorGlow.style.top = event.clientY + "px";
     });
+  }
+
+  const sectionLinks = new Map();
+  document.querySelectorAll('.nav-menu a[href^="#"]').forEach((link) => {
+    const section = document.querySelector(link.getAttribute("href"));
+    if (section) {
+      sectionLinks.set(section, link);
+    }
+  });
+
+  if (sectionLinks.size && "IntersectionObserver" in window) {
+    const sectionObserver = new IntersectionObserver((entries) => {
+      const visibleEntries = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+      if (!visibleEntries.length) return;
+
+      const activeLink = sectionLinks.get(visibleEntries[0].target);
+      document.querySelectorAll(".nav-menu a").forEach((link) => {
+        link.classList.toggle("is-active", link === activeLink);
+      });
+    }, {
+      rootMargin: "-30% 0px -55% 0px",
+      threshold: [0.05, 0.2, 0.5]
+    });
+
+    sectionLinks.forEach((_, section) => sectionObserver.observe(section));
   }
 
   const resumeParts = [
@@ -178,12 +126,18 @@
     }
 
     try {
-      const responses = await Promise.all(resumeParts.map((url) => fetch(url, { cache: "no-store" })));
+      const responses = await Promise.all(
+        resumeParts.map((url) => fetch(url, { cache: "no-store" }))
+      );
+
       if (responses.some((response) => !response.ok)) {
         throw new Error("Latest resume data unavailable");
       }
 
-      const chunks = await Promise.all(responses.map((response) => response.text()));
+      const chunks = await Promise.all(
+        responses.map((response) => response.text())
+      );
+
       const base64 = chunks.join("").replace(/\s/g, "");
       const binary = atob(base64);
       const bytes = new Uint8Array(binary.length);
@@ -207,7 +161,9 @@
     } finally {
       link.removeAttribute("aria-busy");
       link.style.pointerEvents = "";
-      if (originalText) link.textContent = originalText;
+      if (originalText) {
+        link.textContent = originalText;
+      }
     }
   }
 
@@ -215,86 +171,89 @@
     link.addEventListener("click", downloadCurrentResume);
   });
 
-  if (window.gsap) {
+  if (window.gsap && !reduceMotion) {
     gsap.registerPlugin(ScrollTrigger);
-
     gsap.defaults({ ease: "power3.out" });
 
     gsap.to(".orb-one", {
-      x: 80,
-      y: 60,
-      scale: 1.08,
-      duration: 8,
+      x: 56,
+      y: 42,
+      scale: 1.05,
+      duration: 10,
       repeat: -1,
       yoyo: true,
       ease: "sine.inOut"
     });
 
     gsap.to(".orb-two", {
-      x: -90,
-      y: 70,
-      scale: 1.1,
-      duration: 9,
+      x: -62,
+      y: 48,
+      scale: 1.06,
+      duration: 12,
       repeat: -1,
       yoyo: true,
       ease: "sine.inOut"
     });
 
-    gsap.utils.toArray(".reveal-up").forEach((el) => {
-      gsap.fromTo(el,
-        { y: 46, opacity: 0 },
+    gsap.utils.toArray(".reveal-up").forEach((element) => {
+      gsap.fromTo(element,
+        { y: 30, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.95,
+          duration: 0.78,
           scrollTrigger: {
-            trigger: el,
-            start: "top 86%"
+            trigger: element,
+            start: "top 88%",
+            once: true
           }
         }
       );
     });
 
-    gsap.utils.toArray(".reveal-left").forEach((el) => {
-      gsap.fromTo(el,
-        { x: -60, opacity: 0 },
+    gsap.utils.toArray(".reveal-left").forEach((element) => {
+      gsap.fromTo(element,
+        { x: -34, opacity: 0 },
         {
           x: 0,
           opacity: 1,
-          duration: 1,
+          duration: 0.82,
           scrollTrigger: {
-            trigger: el,
-            start: "top 84%"
+            trigger: element,
+            start: "top 86%",
+            once: true
           }
         }
       );
     });
 
-    gsap.utils.toArray(".reveal-right").forEach((el) => {
-      gsap.fromTo(el,
-        { x: 60, opacity: 0 },
+    gsap.utils.toArray(".reveal-right").forEach((element) => {
+      gsap.fromTo(element,
+        { x: 34, opacity: 0 },
         {
           x: 0,
           opacity: 1,
-          duration: 1,
+          duration: 0.82,
           scrollTrigger: {
-            trigger: el,
-            start: "top 84%"
+            trigger: element,
+            start: "top 86%",
+            once: true
           }
         }
       );
     });
 
-    gsap.utils.toArray(".reveal-scale").forEach((el) => {
-      gsap.fromTo(el,
-        { scale: 0.92, opacity: 0 },
+    gsap.utils.toArray(".reveal-scale").forEach((element) => {
+      gsap.fromTo(element,
+        { scale: 0.975, opacity: 0 },
         {
           scale: 1,
           opacity: 1,
-          duration: 1.05,
+          duration: 0.86,
           scrollTrigger: {
-            trigger: el,
-            start: "top 86%"
+            trigger: element,
+            start: "top 88%",
+            once: true
           }
         }
       );
@@ -302,16 +261,28 @@
 
     gsap.utils.toArray(".project-card").forEach((card) => {
       const thumb = card.querySelector(".project-thumb");
+      if (!thumb) return;
+
       card.addEventListener("mouseenter", () => {
-        gsap.to(thumb, { scale: 1.025, duration: 0.45, ease: "power2.out" });
+        gsap.to(thumb, {
+          scale: 1.018,
+          duration: 0.4,
+          ease: "power2.out"
+        });
       });
+
       card.addEventListener("mouseleave", () => {
-        gsap.to(thumb, { scale: 1, duration: 0.45, ease: "power2.out" });
+        gsap.to(thumb, {
+          scale: 1,
+          duration: 0.4,
+          ease: "power2.out"
+        });
       });
     });
   } else {
-    document.querySelectorAll(".reveal-up, .reveal-left, .reveal-right, .reveal-scale").forEach((el) => {
-      el.style.opacity = 1;
+    document.querySelectorAll(".reveal-up, .reveal-left, .reveal-right, .reveal-scale").forEach((element) => {
+      element.style.opacity = 1;
+      element.style.transform = "none";
     });
   }
 })();
