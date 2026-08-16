@@ -7,37 +7,80 @@
       display: none !important;
     }
 
+    .hero-grid {
+      grid-template-columns: minmax(0, 1fr) !important;
+      gap: 0 !important;
+    }
+
+    .hero-content {
+      width: min(100%, 980px) !important;
+      max-width: 980px !important;
+      margin-inline: auto !important;
+    }
+
     .hero-title {
+      max-width: 900px !important;
       font-size: clamp(2.55rem, 4.4vw, 4rem) !important;
       font-weight: 600 !important;
       line-height: 1.08 !important;
       letter-spacing: -0.045em !important;
     }
 
+    .hero-subtitle {
+      max-width: 820px !important;
+    }
+
+    .quick-stats {
+      max-width: 760px !important;
+    }
+
     @media (max-width: 1280px) {
+      .hero-content {
+        width: min(100%, 900px) !important;
+      }
+
       .hero-title {
+        max-width: 840px !important;
         font-size: clamp(2.5rem, 4.35vw, 3.75rem) !important;
       }
     }
 
     @media (max-width: 1024px) {
+      .hero-content {
+        width: 100% !important;
+        max-width: 820px !important;
+      }
+
       .hero-title {
-        max-width: 720px !important;
+        max-width: 760px !important;
         font-size: clamp(2.45rem, 5.2vw, 3.35rem) !important;
+      }
+
+      .hero-subtitle {
+        max-width: 760px !important;
       }
     }
 
     @media (max-width: 820px) {
       .hero-title {
+        max-width: 700px !important;
         font-size: clamp(2.3rem, 6vw, 3rem) !important;
         line-height: 1.1 !important;
       }
     }
 
     @media (max-width: 540px) {
+      .hero-content {
+        max-width: 100% !important;
+      }
+
       .hero-title {
         font-size: clamp(2rem, 8.5vw, 2.5rem) !important;
         letter-spacing: -0.04em !important;
+      }
+
+      .quick-stats {
+        max-width: 100% !important;
       }
     }
 
@@ -255,17 +298,6 @@
           }
         }
       );
-    });
-
-    gsap.to(".visual-shell", {
-      rotateY: -5,
-      rotateX: 4,
-      scrollTrigger: {
-        trigger: ".hero",
-        start: "top top",
-        end: "bottom top",
-        scrub: 1.2
-      }
     });
 
     gsap.utils.toArray(".project-card").forEach((card) => {
