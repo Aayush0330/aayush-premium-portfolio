@@ -50,9 +50,16 @@
     });
   }
 
-  const resumeParts = Array.from({ length: 13 }, (_, index) =>
-    `./resume/data/part-${String(index).padStart(2, "0")}.txt`
-  );
+  const resumeParts = [
+    ...Array.from({ length: 10 }, (_, index) =>
+      `./resume/data/part-${String(index).padStart(2, "0")}.txt`
+    ),
+    "./resume/data/part-10a.txt",
+    "./resume/data/part-10b.txt",
+    "./resume/data/part-11a.txt",
+    "./resume/data/part-11b.txt",
+    "./resume/data/part-12v.txt"
+  ];
 
   async function downloadCurrentResume(event) {
     event.preventDefault();
