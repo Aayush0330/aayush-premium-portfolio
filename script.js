@@ -55,10 +55,24 @@
       `./resume/data/part-${String(index).padStart(2, "0")}.txt`
     ),
     "./resume/data/part-10a.txt",
-    "./resume/data/part-10b.txt",
-    "./resume/data/part-11a.txt",
-    "./resume/data/part-11b.txt",
-    "./resume/data/part-12v.txt"
+    "./resume/data/v3-10b-00.txt",
+    "./resume/data/v3-10b-01.txt",
+    "./resume/data/v3-10b-02.txt",
+    "./resume/data/v3-10b-03.txt",
+    "./resume/data/v3-11a-00.txt",
+    "./resume/data/v3-11a-01.txt",
+    "./resume/data/v3-11a-02.txt",
+    "./resume/data/v3-11a-03.txt",
+    "./resume/data/v3-11b-00.txt",
+    "./resume/data/v3-11b-01.txt",
+    "./resume/data/v3-11b-02.txt",
+    "./resume/data/v3-11b-03.txt",
+    "./resume/data/v4-final-00.txt",
+    "./resume/data/v4-final-01.txt",
+    "./resume/data/v4-final-02.txt",
+    "./resume/data/v4-final-03.txt",
+    "./resume/data/v4-final-04.txt",
+    "./resume/data/v4-final-05.txt"
   ];
 
   async function downloadCurrentResume(event) {
