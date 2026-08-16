@@ -50,6 +50,60 @@
     });
   }
 
+  const resumeParts = Array.from({ length: 13 }, (_, index) =>
+    `./resume/data/part-${String(index).padStart(2, "0")}.txt`
+  );
+
+  async function downloadCurrentResume(event) {
+    event.preventDefault();
+
+    const link = event.currentTarget;
+    const originalText = link.textContent;
+    link.setAttribute("aria-busy", "true");
+    link.style.pointerEvents = "none";
+
+    if (originalText && /resume/i.test(originalText)) {
+      link.textContent = "Preparing Resume...";
+    }
+
+    try {
+      const responses = await Promise.all(resumeParts.map((url) => fetch(url)));
+      if (responses.some((response) => !response.ok)) {
+        throw new Error("Resume data unavailable");
+      }
+
+      const chunks = await Promise.all(responses.map((response) => response.text()));
+      const base64 = chunks.join("").replace(/\s/g, "");
+      const binary = atob(base64);
+      const bytes = new Uint8Array(binary.length);
+
+      for (let index = 0; index < binary.length; index += 1) {
+        bytes[index] = binary.charCodeAt(index);
+      }
+
+      const blob = new Blob([bytes], { type: "application/pdf" });
+      const objectUrl = URL.createObjectURL(blob);
+      const downloadLink = document.createElement("a");
+      downloadLink.href = objectUrl;
+      downloadLink.download = "Aayush_Chandak_CV_2025.pdf";
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      downloadLink.remove();
+      setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
+    } catch (error) {
+      console.error("Resume download failed:", error);
+      window.location.href = "./resume/Aayush_Chandak_Resume.pdf";
+    } finally {
+      link.removeAttribute("aria-busy");
+      link.style.pointerEvents = "";
+      if (originalText) link.textContent = originalText;
+    }
+  }
+
+  document.querySelectorAll('a[download][href*="Aayush_Chandak_Resume.pdf"]').forEach((link) => {
+    link.addEventListener("click", downloadCurrentResume);
+  });
+
   if (window.gsap) {
     gsap.registerPlugin(ScrollTrigger);
 
@@ -74,7 +128,6 @@
       yoyo: true,
       ease: "sine.inOut"
     });
-
 
     gsap.utils.toArray(".reveal-up").forEach((el) => {
       gsap.fromTo(el,
