@@ -10,6 +10,7 @@
   const year = document.querySelector("#year");
 
   if (year) year.textContent = new Date().getFullYear();
+
   window.addEventListener("load", () => {
     if (window.gsap && loader) {
       gsap.timeline()
@@ -51,28 +52,14 @@
   }
 
   const resumeParts = [
-    ...Array.from({ length: 10 }, (_, index) =>
-      `./resume/data/part-${String(index).padStart(2, "0")}.txt`
+    ...Array.from({ length: 11 }, (_, index) =>
+      `./resume/parts/part-${String(index).padStart(2, "0")}.txt`
     ),
-    "./resume/data/part-10a.txt",
-    "./resume/data/v3-10b-00.txt",
-    "./resume/data/v3-10b-01.txt",
-    "./resume/data/v3-10b-02.txt",
-    "./resume/data/v3-10b-03.txt",
-    "./resume/data/v3-11a-00.txt",
-    "./resume/data/v3-11a-01.txt",
-    "./resume/data/v3-11a-02.txt",
-    "./resume/data/v3-11a-03.txt",
-    "./resume/data/v3-11b-00.txt",
-    "./resume/data/v3-11b-01.txt",
-    "./resume/data/v3-11b-02.txt",
-    "./resume/data/v3-11b-03.txt",
-    "./resume/data/v4-final-00.txt",
-    "./resume/data/v4-final-01.txt",
-    "./resume/data/v4-final-02.txt",
-    "./resume/data/v4-final-03.txt",
-    "./resume/data/v4-final-04.txt",
-    "./resume/data/v4-final-05.txt"
+    "./resume/parts/part-11a.txt",
+    "./resume/parts/part-11b.txt",
+    ...Array.from({ length: 9 }, (_, index) =>
+      `./resume/parts/part-${String(index + 12).padStart(2, "0")}.txt`
+    )
   ];
 
   async function downloadCurrentResume(event) {
@@ -83,14 +70,14 @@
     link.setAttribute("aria-busy", "true");
     link.style.pointerEvents = "none";
 
-    if (originalText && /resume/i.test(originalText)) {
+    if (originalText && /resume|cv/i.test(originalText)) {
       link.textContent = "Preparing Resume...";
     }
 
     try {
-      const responses = await Promise.all(resumeParts.map((url) => fetch(url)));
+      const responses = await Promise.all(resumeParts.map((url) => fetch(url, { cache: "no-store" })));
       if (responses.some((response) => !response.ok)) {
-        throw new Error("Resume data unavailable");
+        throw new Error("Latest resume data unavailable");
       }
 
       const chunks = await Promise.all(responses.map((response) => response.text()));
@@ -106,14 +93,14 @@
       const objectUrl = URL.createObjectURL(blob);
       const downloadLink = document.createElement("a");
       downloadLink.href = objectUrl;
-      downloadLink.download = "Aayush_Chandak_CV_2025.pdf";
+      downloadLink.download = "Aayush_Chandak_Resume.pdf";
       document.body.appendChild(downloadLink);
       downloadLink.click();
       downloadLink.remove();
-      setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
+      setTimeout(() => URL.revokeObjectURL(objectUrl), 1500);
     } catch (error) {
       console.error("Resume download failed:", error);
-      window.location.href = "./resume/Aayush_Chandak_Resume.pdf";
+      alert("Resume download failed. Please refresh the page and try again.");
     } finally {
       link.removeAttribute("aria-busy");
       link.style.pointerEvents = "";
@@ -121,7 +108,7 @@
     }
   }
 
-  document.querySelectorAll('a[download][href*="Aayush_Chandak_Resume.pdf"]').forEach((link) => {
+  document.querySelectorAll('a[href*="Aayush_Chandak_Resume.pdf"]').forEach((link) => {
     link.addEventListener("click", downloadCurrentResume);
   });
 
