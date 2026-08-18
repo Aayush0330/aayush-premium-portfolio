@@ -27,6 +27,12 @@
     document.head.appendChild(appleTouchIcon);
   }
 
+  const contactStyles = document.createElement("link");
+  contactStyles.rel = "stylesheet";
+  contactStyles.href = "./contact-v2.css?v=2";
+  contactStyles.dataset.contactV2 = "true";
+  document.head.appendChild(contactStyles);
+
   if (year) {
     year.textContent = new Date().getFullYear();
   }
