@@ -11,6 +11,22 @@
   const year = document.querySelector("#year");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  const faviconPath = "./assets/profile.png";
+  const favicon = document.querySelector('link[rel="icon"]') || document.createElement("link");
+  favicon.rel = "icon";
+  favicon.type = "image/png";
+  favicon.href = faviconPath;
+  if (!favicon.parentNode) {
+    document.head.appendChild(favicon);
+  }
+
+  const appleTouchIcon = document.querySelector('link[rel="apple-touch-icon"]') || document.createElement("link");
+  appleTouchIcon.rel = "apple-touch-icon";
+  appleTouchIcon.href = faviconPath;
+  if (!appleTouchIcon.parentNode) {
+    document.head.appendChild(appleTouchIcon);
+  }
+
   if (year) {
     year.textContent = new Date().getFullYear();
   }
